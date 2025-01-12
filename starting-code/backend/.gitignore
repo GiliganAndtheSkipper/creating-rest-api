@@ -1,0 +1,68 @@
+# Logs and Debug Files (Prevent log clutter and debug info)
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime Data (Prevent runtime process data)
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Code Coverage Reports (Exclude coverage data generated during testing)
+coverage/
+.nyc_output/
+lib-cov/
+
+# IDE and Editor Config Files (Prevent IDE-specific settings from being tracked)
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+
+# Build Output and Compiled Files (Prevent compiled and generated files)
+build/
+build/Release
+.next/
+
+# Package Managers and Dependencies (Prevent dependency folders from being tracked)
+node_modules/
+jspm_packages/
+bower_components/
+
+# Package Lock and Cache Files (Prevent package manager cache and lock files)
+.npm
+.yarn-integrity
+.lock-wscript
+package-lock.json
+yarn.lock
+
+# ESLint and Linting Cache (Prevent linting cache files)
+.eslintcache
+
+# TypeScript Definitions (Prevent older TypeScript declaration files)
+typings/
+
+# Environment Files (Prevent sensitive environment files)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Compiled Binary Addons and Testing Files (Prevent extra test artifacts)
+*.tgz
+*.bak
+*.orig
+*.old
+
+# Optional REPL History (Prevent Node.js REPL history)
+.node_repl_history
+
+# macOS System Files (Prevent unwanted macOS files)
+.DS_Store
+**/.DS_Store
+**/._*

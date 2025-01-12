@@ -1,0 +1,49 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Node.js Dependencies (Prevent large dependency folders from being tracked)
+node_modules/
+.pnp/
+.pnp.js
+
+# Build and Production Output (Prevent compiled code from being tracked)
+build/
+frontend/build/
+backend/build/
+
+# Testing and Coverage Reports (Exclude test coverage data)
+coverage/
+
+# macOS System Files (Prevent unwanted macOS system files from being tracked)
+.DS_Store
+**/.DS_Store
+**/._*
+
+# IDE and Editor Config Files (Exclude IDE-specific settings)
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+
+# Logs and Cache Files (Exclude generated log and cache files)
+*.log
+*.log.*
+.cache/
+.tmp/
+
+# Backup Files (Prevent accidental inclusion of backup files)
+*.bak
+*.old
+*.orig
+
+# Environment Files (Prevent sensitive environment variables from being tracked)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug Logs (Exclude npm and yarn debug logs)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
