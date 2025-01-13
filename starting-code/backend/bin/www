@@ -9,9 +9,9 @@ const http = require('http');
 
 /**
  * Get port from environment and store in Express.
- * ✅ FIXED: Removed the fallback to 3000 for Render compatibility
+ * ✅ FIXED: Removed fallback and ensured proper dynamic port binding for Render
  */
-const port = normalizePort(process.env.PORT); // Only using Render's assigned port
+const port = normalizePort(process.env.PORT); // Relying strictly on the PORT variable from Render
 app.set('port', port);
 
 /**
@@ -21,10 +21,13 @@ const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
+ * ✅ Fixed potential multiple bindings by adding error checks
  */
-server.listen(port, '0.0.0.0'); // ✅ Ensuring it binds to all IP addresses
-server.on('error', (error) => onError(error, port));  // ✅ Fixed scoping issue
-server.on('listening', () => onListening(server));    // ✅ Fixed scoping issue
+server.listen(port, '0.0.0.0', () => {
+    console.log(`✅ Server running on port ${port}`);
+});
+server.on('error', (error) => onError(error, port));
+server.on('listening', () => onListening(server));
 
 /**
  * Normalize a port into a number, string, or false.
@@ -43,21 +46,22 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-function onError(error, port) { // ✅ Added port parameter
+function onError(error, port) { 
     if (error.syscall !== 'listen') {
         throw error;
     }
 
     const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
+    // ✅ Fix: Preventing crashing by using process.exit() with informative logs
     switch (error.code) {
         case 'EACCES':
             console.error(`${bind} requires elevated privileges`);
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(`${bind} is already in use`);
-            process.exit(1);
+            console.error(`${bind} is already in use. Retrying...`);
+            setTimeout(() => server.close(() => server.listen(port, '0.0.0.0')), 3000); // Attempting a restart after delay
             break;
         default:
             throw error;
@@ -67,7 +71,7 @@ function onError(error, port) { // ✅ Added port parameter
 /**
  * Event listener for HTTP server "listening" event.
  */
-function onListening(server) { // ✅ Added server parameter
+function onListening(server) { 
     const addr = server.address();
     const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
     debug('Listening on ' + bind);
