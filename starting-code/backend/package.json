@@ -1,12 +1,13 @@
 {
   "name": "books-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Book Club Scheduler Backend API",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
-  "author": "",
+  "author": "Gil Garza",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
