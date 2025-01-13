@@ -6,7 +6,9 @@ const cors = require('cors');
 const booksRouter = require('./routes/Books');
 
 const app = express();
-const PORT = process.env.PORT;
+
+// ✅ Fix: Set dynamic port for Render (Falls back to 3001 for local testing)
+const PORT = process.env.PORT || 3001;
 
 // ✅ CORS Configuration (Allows all origins, can be restricted further if needed)
 app.use(cors({
@@ -34,9 +36,9 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong on the server' });
 });
 
-// ✅ Start Server (Can be moved to `bin/www` if needed)
+// ✅ Start Server (PORT now dynamically assigned)
 app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
+    console.log(`✅ Server running on port ${PORT}`);
 });
 
 module.exports = app;
