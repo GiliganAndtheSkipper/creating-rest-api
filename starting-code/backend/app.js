@@ -6,7 +6,7 @@ const cors = require('cors');
 const booksRouter = require('./routes/Books');
 
 const app = express();
-const PORT = process.env.PORT || 3001;  // Port Handling
+const PORT = process.env.PORT;
 
 // ✅ CORS Configuration (Allows all origins, can be restricted further if needed)
 app.use(cors({
